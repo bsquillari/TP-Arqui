@@ -5,7 +5,7 @@ GLOBAL picMasterMask
 GLOBAL picSlaveMask
 GLOBAL haltcpu
 GLOBAL _hlt
-
+GLOBAL _softwareHandler
 GLOBAL _irq00Handler
 GLOBAL _irq01Handler
 GLOBAL _irq02Handler
@@ -139,6 +139,13 @@ _irq05Handler:
 	irqHandlerMaster 5
 
 
+_softwareHandler:
+	pushState
+	mov rcx, rax
+	call int_80
+
+	popState
+	iretq
 ;Zero Division Exception
 _exception0Handler:
 	exceptionHandler 0
