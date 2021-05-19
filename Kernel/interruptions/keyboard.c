@@ -14,19 +14,28 @@ static const char keyTable[] = {
     'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '-', 
     0, '*', 0, ' ',0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '7','↑', '9', '-', '←', '5', '→', '+', '1', '↓', '3', 0, 0, 0, 0,0, 0, 0, 0, 0, 0, 0, 0, 0
 };
+static char buffer[64] = {0};
+static int bufferIdx=0;
 
 void keyboard_handler(){
     idx = _keyHandler();
     if(BREAK_CODE(idx)) //es break code 
         keyDetected=0;
-    else if(idx == 0x1C)    //code del enter
+    else if(idx == 0x1C) {   //code del enter
         ncNewline();
-    else if(idx == 0x0E)
+        buffer[bufferIdx]=0;
+        bufferIdx=0;
+    }
+    else if(idx == 0x0E){
         ncBackspace();
-    else if(idx == 0xF)
+        bufferIdx--;
+    }
+    else if(idx == 0xF){
         ncSwitchShell();
+        bufferIdx=0;
+    }
     else{
-        keyDetected=1;
+        buffer[bufferIdx++]=keyTable[idx];
         ncPrintChar(keyTable[idx]);
         }
 }
