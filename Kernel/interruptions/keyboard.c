@@ -1,5 +1,5 @@
 #include <keyboard.h>
-
+#include <naiveConsole.h>
 #define BREAK_CODE(num) num>0x80
 
 
@@ -18,8 +18,14 @@ void keyboard_handler(){
     idx = _keyHandler();
     if(BREAK_CODE(idx)) //es break code 
         keyDetected=0;
-    else
+    else if(idx == 0x1C)    //code del enter
+        ncNewline();
+    else if(idx == 0x0E)
+        ncBackspace();
+    else{
         keyDetected=1;
+        ncPrintChar(keyTable[idx]);
+        }
 }
 
 

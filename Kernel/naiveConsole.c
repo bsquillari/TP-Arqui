@@ -22,13 +22,16 @@ void ncPrintChar(char character)
 	currentVideo += 2;
 }
 
-void ncNewline()
-{
-	do
-	{
-		ncPrintChar(' ');
+void ncNewline(){
+	for(int i = 0; i<height; i++){
+		for (int j=0; j<2*width; j++){
+			video[width*2*i + j] = video[width*2*(i+1) + j];
+		}
 	}
-	while((uint64_t)(currentVideo - video) % (width * 2) != 0);
+	for(int i =0; i<=2*width; i+=2){
+		video[height*width-i] = ' ';
+	}
+	currentVideo = video + (height-1)*width*2;
 }
 
 void ncPrintDec(uint64_t value)
@@ -52,13 +55,16 @@ void ncPrintBase(uint64_t value, uint32_t base)
     ncPrint(buffer);
 }
 
-void ncClear()
-{
-	int i;
+void ncBackspace(){
+	currentVideo-=2;
+	*currentVideo=' ';
+}
 
+void ncClear(){
+	int i;
 	for (i = 0; i < height * width; i++)
 		video[i * 2] = ' ';
-	currentVideo = video;
+	currentVideo = video + (height-1)*width*2;
 }
 
 static uint32_t uintToBase(uint64_t value, char * buffer, uint32_t base)
