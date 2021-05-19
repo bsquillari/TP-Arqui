@@ -3,6 +3,8 @@
 #include <lib.h>
 #include <moduleLoader.h>
 #include <naiveConsole.h>
+#include <interrupts.h>
+#include <keyboard.h>
 
 extern uint8_t text;
 extern uint8_t rodata;
@@ -100,5 +102,21 @@ int main()
 	ncNewline();
 
 	ncPrint("[Finished]");
+
+	ncClear();
+	load_idt();
+	int changeDetected = 0;
+	while (1){
+		if(!changeDetected && keyDetect()){
+			changeDetected=1;
+			ncPrintChar(readChar());
+		}
+		if (changeDetected && !keyDetect()){
+			changeDetected = 0;
+		}
+	}
+
+
+
 	return 0;
 }
