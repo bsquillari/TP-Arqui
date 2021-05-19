@@ -18,10 +18,19 @@ void ncPrint(const char * string)
 
 void ncPrintChar(char character)
 {
+	ncScroll();
 	*currentVideo = character;
 	currentVideo += 2;
 }
 
+void ncScroll(){
+	if(currentVideo-video == height*width*2){
+		for(int i=0; i < height*width*2 ; i++)
+			video[i]=video[i+(width*2)];
+		currentVideo-=width*2;
+
+	}
+}
 void ncNewline(){
 	for(int i = 0; i<height; i++){
 		for (int j=0; j<2*width; j+=2){
