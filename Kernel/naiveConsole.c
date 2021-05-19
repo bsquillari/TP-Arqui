@@ -24,12 +24,12 @@ void ncPrintChar(char character)
 
 void ncNewline(){
 	for(int i = 0; i<height; i++){
-		for (int j=0; j<2*width; j++){
+		for (int j=0; j<2*width; j+=2){
 			video[width*2*i + j] = video[width*2*(i+1) + j];
 		}
 	}
 	for(int i =0; i<=2*width; i+=2){
-		video[height*width-i] = ' ';
+		video[height*2*width-i] = ' ';
 	}
 	currentVideo = video + (height-1)*width*2;
 }
