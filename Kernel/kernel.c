@@ -102,21 +102,8 @@ int main()
 	ncNewline();
 
 	ncPrint("[Finished]");
-	//while(1);
 	ncClear();
 	load_idt();
-	int changeDetected = 0;
-	while (1){
-		// if(!changeDetected && keyDetect()){
-		// 	changeDetected=1;
-		// 	ncPrintDec(readChar());
-		// }
-		// if (changeDetected && !keyDetect()){
-		// 	changeDetected = 0;
-		// }
-	}
-
-
-
+	while (1);
 	return 0;
 }
