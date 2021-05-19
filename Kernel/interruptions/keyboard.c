@@ -23,6 +23,8 @@ void keyboard_handler(){
         ncNewline();
     else if(idx == 0x0E)
         ncBackspace();
+    else if(idx == 0xF)
+        ncSwitchShell();
     else{
         keyDetected=1;
         ncPrintChar(keyTable[idx]);

@@ -7,6 +7,7 @@ static uint8_t * const video = (uint8_t*)0xB8000;
 static uint8_t * currentVideo = (uint8_t*)0xB8000;
 static const uint32_t width = 80;
 static const uint32_t height = 25 ;
+static uint8_t shellSelector = 0;
 
 void ncPrint(const char * string)
 {
@@ -31,8 +32,30 @@ void ncScroll(){
 
 	}
 }
+
+void ncSwitchShell(){
+	shellSelector=1-shellSelector;
+	currentVideo = (shellSelector)?video+(height-2)/2*width*2:video + (height-1)*width*2;
+	for(uint8_t i = 0; i<width*2;i+=2){
+		currentVideo[i]=' ';
+	}
+}
+
 void ncNewline(){
-	for(int i = 0; i<height; i++){
+	if(shellSelector){
+		for(int i = 0; i<(height/2)-1; i++){
+			for (int j=0; j<2*width-1; j+=2){
+				video[width*2*i + j] = video[width*2*(i+1) + j];
+			}
+		}
+		for(int i=0; i<2*width; i+=2){
+			video[(height-2)/2*width*2+i] = ' ';
+		}
+		currentVideo = video+(height-2)/2*width*2;
+		return;
+	}
+
+	for(int i = (height+1)/2; i<height; i++){
 		for (int j=0; j<2*width; j+=2){
 			video[width*2*i + j] = video[width*2*(i+1) + j];
 		}
@@ -70,10 +93,13 @@ void ncBackspace(){
 }
 
 void ncClear(){
-	int i;
+	int i, mid = width;
 	for (i = 0; i < height * width; i++)
 		video[i * 2] = ' ';
-	currentVideo = video + (height-1)*width*2;
+	for(i=0; i<width*2; i+=2){
+		video[24*width+i] = '-';
+	}
+	currentVideo = (shellSelector)?:video + (height-1)*width*2;
 }
 
 static uint32_t uintToBase(uint64_t value, char * buffer, uint32_t base)
