@@ -24,6 +24,13 @@ void ncPrintChar(char character)
 	currentVideo += 2;
 }
 
+void ncPrintColorChar(char character,int color)
+{
+	ncScroll();
+	*currentVideo++ = character;
+	*currentVideo++= color;
+}
+
 void ncScroll(){
 	if(currentVideo-video == height*width*2){
 		for(int i=0; i < height*width*2 ; i++)

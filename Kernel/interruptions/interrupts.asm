@@ -143,9 +143,9 @@ _softwareHandler:
 	pushState
 	mov rcx, rax
 	call int_80
-
 	popState
 	iretq
+	
 ;Zero Division Exception
 _exception0Handler:
 	exceptionHandler 0
