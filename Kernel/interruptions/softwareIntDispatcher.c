@@ -19,13 +19,13 @@ void int_80(unsigned int fd, char * buffer, unsigned int count, int sysCall){
 
 void write(unsigned int fd, const char * buffer, unsigned int count){       // No toma en cuenta files, por ahora
     if(fd==1){      // STDOUT
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < count && buffer[i]; i++)            // Tiene que cortar en un 0?
         {
             ncPrintChar(buffer[i]);
         }
     }
     if(fd==2){      // STDERR
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < count && buffer[i]; i++)
         {
             ncPrintColorChar(buffer[i], RED);
         }
