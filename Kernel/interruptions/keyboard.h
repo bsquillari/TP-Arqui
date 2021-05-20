@@ -8,6 +8,5 @@ void cleanBuffer();
 int getEndBuffer();
 char * getBuffer();
 
-char * pruebaInt80();
 
 #endif

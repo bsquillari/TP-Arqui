@@ -4,7 +4,7 @@
 void write(unsigned int fd, const char * buffer, unsigned int count);
 void read(unsigned int fd, char * buffer, unsigned int count);
 void int_80(unsigned int fd, char * buffer, unsigned int count, int sysCall){
-    switch (sysCall)
+    switch (sysCall)        // Miro el valor de rax
     {
     case 0:
         write(fd, buffer, count);
@@ -35,6 +35,7 @@ void write(unsigned int fd, const char * buffer, unsigned int count){       // N
 void read(unsigned int fd, char * buffer, unsigned int count){      // No toma en cuenta files, por ahora
     if(fd==0){      // STDIN
         cleanBuffer();
+        _sti();
         while(!getEndBuffer());
         char * inBuffer = getBuffer();
         for (int i = 0; i < count && inBuffer[i]; i++)
