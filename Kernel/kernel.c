@@ -104,6 +104,15 @@ int main()
 	ncPrint("[Finished]");
 	ncClear();
 	load_idt();
+	// Prueba de int 80h
+	ncPrintChar('X');
+	char * prueba = pruebaInt80();
+	ncPrintChar('X');
+	ncPrint(prueba);
+	ncPrintChar('X');
+
+
+
 	while (1);
 	return 0;
 }

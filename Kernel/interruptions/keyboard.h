@@ -4,8 +4,10 @@
 
 void keyboard_handler();
 int _keyHandler();
-int keyDetect();
-char readChar();
+void cleanBuffer();
+int getEndBuffer();
+char * getBuffer();
 
+char * pruebaInt80();
 
 #endif

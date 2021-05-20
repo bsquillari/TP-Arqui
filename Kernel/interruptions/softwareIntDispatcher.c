@@ -1,8 +1,9 @@
 #include <naiveConsole.h>
+#include <keyboard.h>
 #define RED 4
 void write(unsigned int fd, const char * buffer, unsigned int count);
 void read(unsigned int fd, char * buffer, unsigned int count);
-int_80(unsigned int fd, const char * buffer, unsigned int count, int sysCall){
+void int_80(unsigned int fd, char * buffer, unsigned int count, int sysCall){
     switch (sysCall)
     {
     case 0:
@@ -16,7 +17,7 @@ int_80(unsigned int fd, const char * buffer, unsigned int count, int sysCall){
     }
 }
 
-void write(unsigned int fd, const char * buffer, unsigned int count){
+void write(unsigned int fd, const char * buffer, unsigned int count){       // No toma en cuenta files, por ahora
     if(fd==1){      // STDOUT
         for (int i = 0; i < count; i++)
         {
@@ -31,8 +32,14 @@ void write(unsigned int fd, const char * buffer, unsigned int count){
     }
 }
 
-void read(unsigned int fd, char * buffer, unsigned int count){
+void read(unsigned int fd, char * buffer, unsigned int count){      // No toma en cuenta files, por ahora
     if(fd==0){      // STDIN
-        
+        cleanBuffer();
+        while(!getEndBuffer());
+        char * inBuffer = getBuffer();
+        for (int i = 0; i < count && inBuffer[i]; i++)
+        {
+            buffer[i] = inBuffer[i];
+        }
     }
 }

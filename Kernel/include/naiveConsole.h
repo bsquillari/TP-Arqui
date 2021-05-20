@@ -13,5 +13,8 @@ void ncPrintBase(uint64_t value, uint32_t base);
 void ncScroll();
 void ncClear();
 void ncPrintColorChar(char character,int color);
+void ncBackSpace();
+void ncSwitchShell();
+
 
 #endif

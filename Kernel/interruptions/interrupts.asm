@@ -17,7 +17,7 @@ GLOBAL _exception0Handler
 
 EXTERN irqDispatcher
 EXTERN exceptionDispatcher
-
+EXTERN int_80
 SECTION .text
 
 %macro pushState 0
