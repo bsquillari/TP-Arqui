@@ -1,5 +1,7 @@
 #include <naiveConsole.h>
 
+#define GREY 7
+
 static uint32_t uintToBase(uint64_t value, char * buffer, uint32_t base);
 
 static char buffer[64] = { '0' };
@@ -32,11 +34,14 @@ void ncPrintColorChar(char character,int color)
 }
 
 void ncScroll(){
-	if(currentVideo-video == height*width*2){
-		for(int i=0; i < height*width*2 ; i++)
-			video[i]=video[i+(width*2)];
-		currentVideo-=width*2;
-
+	if(shellSelector){
+		if(currentVideo-video == (height/2)*width*2){
+			ncNewline();
+		}
+	}else{
+		if(currentVideo-video == height*width*2){
+			ncNewline();
+		}
 	}
 }
 
@@ -51,25 +56,23 @@ void ncSwitchShell(){
 void ncNewline(){
 	if(shellSelector){
 		for(int i = 0; i<(height/2)-1; i++){
-			for (int j=0; j<2*width-1; j+=2){
+			for (int j=0; j<2*width-1; j++)
 				video[width*2*i + j] = video[width*2*(i+1) + j];
-			}
 		}
-		for(int i=0; i<2*width; i+=2){
+		for(int i=0; i<2*width; i+=2)
 			video[(height-2)/2*width*2+i] = ' ';
-		}
+		
 		currentVideo = video+(height-2)/2*width*2;
 		return;
 	}
 
 	for(int i = (height+1)/2; i<height; i++){
-		for (int j=0; j<2*width; j+=2){
+		for (int j=0; j<2*width; j++)
 			video[width*2*i + j] = video[width*2*(i+1) + j];
-		}
 	}
-	for(int i =0; i<=2*width; i+=2){
+	for(int i =0; i<=2*width; i+=2)
 		video[height*2*width-i] = ' ';
-	}
+	
 	currentVideo = video + (height-1)*width*2;
 }
 
