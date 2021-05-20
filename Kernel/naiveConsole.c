@@ -49,28 +49,23 @@ void ncSwitchShell(){
 void ncNewline(){
 	if(shellSelector){
 		for(int i = 0; i<(height/2)-1; i++){
-			for (int j=0; j<2*width-1; j++){
+			for (int j=0; j<2*width-1; j++)
 				video[width*2*i + j] = video[width*2*(i+1) + j];
-			}
 		}
-		for(int i=0; i<2*width; i++){
-			if(i%2==0)
-				video[(height-2)/2*width*2+i] = ' ';
-			else
-				video[(height-2)/2*width*2+i]=GREY; //restauro el color de la celda
-		}
+		for(int i=0; i<2*width; i+=2)
+			video[(height-2)/2*width*2+i] = ' ';
+		
 		currentVideo = video+(height-2)/2*width*2;
 		return;
 	}
 
 	for(int i = (height+1)/2; i<height; i++){
-		for (int j=0; j<2*width; j++){
+		for (int j=0; j<2*width; j++)
 			video[width*2*i + j] = video[width*2*(i+1) + j];
-		}
 	}
-	for(int i =0; i<=2*width; i+=2){
+	for(int i =0; i<=2*width; i+=2)
 		video[height*2*width-i] = ' ';
-	}
+	
 	currentVideo = video + (height-1)*width*2;
 }
 
