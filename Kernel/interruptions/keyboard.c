@@ -16,15 +16,19 @@ static const char keyTable[] = {
 };
 static char buffer[64] = {0};
 static int bufferIdx=0;
-
+static int endBuffer = 0;
 void keyboard_handler(){
     idx = _keyHandler();
+    if(endBuffer){
+        buffer[bufferIdx]=0;
+        bufferIdx=0;
+        endBuffer = 0;
+    }
     if(BREAK_CODE(idx)) //es break code 
         keyDetected=0;
     else if(idx == 0x1C) {   //code del enter
         ncNewline();
-        buffer[bufferIdx]=0;
-        bufferIdx=0;
+        endBuffer = 1;
     }
     else if(idx == 0x0E){
         ncBackspace();
@@ -40,12 +44,16 @@ void keyboard_handler(){
         }
 }
 
-
-int keyDetect(){
-    return keyDetected;
+void cleanBuffer(){
+    ncNewline();
+    buffer[0]=0;
+    bufferIdx=0;
 }
 
-char readChar(){
-    keyDetected = 0;
-    return keyTable[idx];
+int getEndBuffer(){
+    return endBuffer;
+}
+
+char * getBuffer(){
+    return buffer;
 }
