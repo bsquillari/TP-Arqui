@@ -151,7 +151,7 @@ _exception0Handler:
 	exceptionHandler 0
 
 haltcpu:
-	sti
+	cli
 	hlt
 	ret
 

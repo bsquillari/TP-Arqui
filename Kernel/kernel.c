@@ -104,9 +104,9 @@ int main()
 	ncPrint("[Finished]");
 	ncClear();
 	load_idt();
-	//_NoOp();
+	
 	while (1){
-		haltcpu();
+		_hlt();
 	}
 	return 0;
 }
