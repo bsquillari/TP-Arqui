@@ -1,6 +1,16 @@
 GLOBAL cpuVendor
+GLOBAL _NoOp
 
 section .text
+
+
+_NoOp:
+	loop: 
+		nop
+		jmp loop
+		ret
+
+
 	
 cpuVendor:
 	push rbp
