@@ -33,8 +33,8 @@ void load_idt() {
   setup_IDT_entry (0x80, (uint64_t)&_softwareHandler);
 
 
-	// Habilita timer tick y teclado
-	picMasterMask(0xFC);  // 1111 1100
+	// Habilita solo teclado
+	picMasterMask(0xFD);  // 1111 1101
 	picSlaveMask(0xFF);
 
 	_sti();

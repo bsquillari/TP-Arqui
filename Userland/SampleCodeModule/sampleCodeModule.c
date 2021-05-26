@@ -15,6 +15,12 @@ int main() {
 		char* buffer = scanf();
 		printf(buffer);
 	}
+
+	// **		Prueba básica de las exceptions			** //
+		// #include "exceptionTests.h"
+		// divTest();
+	// *************************************************** //
+
 	// char a = getChar();
 	// putChar(a);
 	// char* buf = scanf();

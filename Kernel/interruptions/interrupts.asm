@@ -16,6 +16,10 @@ GLOBAL _irq05Handler
 GLOBAL _exception0Handler
 GLOBAL _exception6Handler
 
+EXTERN loader
+EXTERN getEndBuffer
+EXTERN printEOE
+
 EXTERN irqDispatcher
 EXTERN exceptionDispatcher
 EXTERN int_80
@@ -88,13 +92,15 @@ SECTION .text
 	
 	popState
 
-	call ripMachine		;	El usuario tiene que reiniciar la maquina
+	;	Espero una tecla del usuario y luego reinicio el kernel.
+	call printEOE
+	sti
+	call _hlt
+	pop rax
+	push loader
 	iretq
 %endmacro
 
-ripMachine:
-	nop
-	jmp ripMachine
 
 printRegs:
 	mov rbx, 0
