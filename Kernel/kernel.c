@@ -110,7 +110,7 @@ int main()
 
 	// read(0, buffer, 5);
 	// write(1, buffer, 5);
-	ncPrintHex(((EntryPoint)sampleCodeModuleAddress)());	//aca se hace el llamado a main de user
+	((EntryPoint)sampleCodeModuleAddress)();	//aca se hace el llamado a main de user
 
 	while (1){
 		_hlt();

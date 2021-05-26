@@ -19,14 +19,14 @@ static int bufferIdx=0;
 static int endBuffer = 0;
 void keyboard_handler(){
     idx = _keyHandler();
-    if(BREAK_CODE(idx)) //es break code 
-        return;
-    else if(endBuffer){
+    
+    if(endBuffer){
         buffer[bufferIdx]=0;
         bufferIdx=0;
         endBuffer = 0;
     }
-    
+    if(BREAK_CODE(idx)) //es break code 
+        return;
     else if(idx == 0x1C) {   //code del enter
         ncNewline();
         endBuffer = 1;

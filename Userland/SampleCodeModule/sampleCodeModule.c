@@ -7,14 +7,30 @@ static int var2 = 0;
 
 
 int main() {
-	//All the following code may be removed 
-	*v = 'X';
-	*(v+1) = 0x74;
+	
+	
 
-	while(1){
-		char* buffer = scanf();
-		printf(buffer);
-	}
+	// while(1){
+	// 	char* buffer = scanf();
+	// 	//printf(buffer);
+	// }
+
+	// **		Prueba básica de las sysTime			** //
+	// #include "sysCall.h"
+	// int time = sysTime(2);
+	
+	// printNum(time);
+	// char a[1];
+	// sysRead(0,a, 1);
+	// time = sysTime(4);
+
+	// printNum(time);
+	// sysRead(0,a, 1);
+	// time = sysTime(0);
+
+	// printNum(time);
+	// *************************************************** //
+
 
 	// **		Prueba básica de las exceptions			** //
 		// #include "exceptionTests.h"
@@ -26,9 +42,5 @@ int main() {
 	// char* buf = scanf();
 	// printf(buf);
 	// printf("bue");
-	//Test if BSS is properly set up
-	if (var1 == 0 && var2 == 0)
-		return 0xDEADC0DE;
-	
-	return 0xDEADBEEF;
+	return 0;
 }

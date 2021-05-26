@@ -3,14 +3,18 @@
 #define RED 4
 void write(unsigned int fd, const char * buffer, unsigned int count);
 void read(unsigned int fd, char * buffer, unsigned int count);
-void int_80(unsigned int fd, char * buffer, unsigned int count, int sysCall){
+int accessClock(unsigned int mode);
+int int_80(unsigned int arg1, unsigned int arg2, unsigned int arg3, int sysCall){
     switch (sysCall)        // Miro el valor de rax
     {
     case 0:
-        write(fd, buffer, count);
+        write(arg1, arg2, arg3);
         break;
     case 1:
-        read(fd, buffer, count);
+        read(arg1, arg2, arg3);
+        break;
+    case 2:             // Decido que el 2 hace referencia al RTC.
+        return accessClock(arg1);
         break;
     default:
         break;
