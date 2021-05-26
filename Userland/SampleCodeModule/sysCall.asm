@@ -41,12 +41,13 @@ section .text
 sysWrite:
     pushState
     mov rax, 0
-
     int 80h
     popState
     ret
 
-sysRead
-
-    ;TODO
+sysRead:
+	pushState
+    mov rax, 1
+	int 80h
+	popState
     ret
