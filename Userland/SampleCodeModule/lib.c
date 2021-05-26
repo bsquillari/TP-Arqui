@@ -66,6 +66,10 @@ void printNum(int num){
 	printf(numToStr(num));
 }
 
+void printHex(int num){
+	
+}
+
 void printer(char* string){
 	sysWrite(STDERR, string, strlen(string));
 }

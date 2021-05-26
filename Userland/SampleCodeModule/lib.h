@@ -9,4 +9,7 @@ void putChar(char c);
 void printf(char* string, ...);
 void printNum(int num);
 void printer(char* string);
+void printHex(int num);
+char getChar();
+char* scanf();
 #endif

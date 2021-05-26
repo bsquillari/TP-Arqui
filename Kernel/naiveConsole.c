@@ -70,8 +70,12 @@ void ncNewline(){
 			for (int j=0; j<2*width-1; j++)
 				video[width*2*i + j] = video[width*2*(i+1) + j];
 		}
-		for(int i=0; i<2*width; i+=2)
-			video[(height-2)/2*width*2+i] = ' ';
+		for(int i=0; i<2*width; i++){
+			if(i%2==0)
+				video[(height-2)/2*width*2+i] = ' ';
+			else
+				video[(height-2)/2*width*2+i]=GREY;//restauro color de celda
+		}
 		
 		currentVideo = video+(height-2)/2*width*2;
 		return;
@@ -81,11 +85,16 @@ void ncNewline(){
 		for (int j=0; j<2*width; j++)
 			video[width*2*i + j] = video[width*2*(i+1) + j];
 	}
-	for(int i =0; i<=2*width; i+=2)
-		video[height*2*width-i] = ' ';
+	for(int i =0; i<2*width; i++){
+		if(i%2==0)
+			video[height*2*width-i] = ' ';
+		else
+			video[height*2*width-i] =GREY; //restauro color de celda
+	}
 	
 	currentVideo = video + (height-1)*width*2;
 }
+
 
 void ncPrintDec(uint64_t value)
 {

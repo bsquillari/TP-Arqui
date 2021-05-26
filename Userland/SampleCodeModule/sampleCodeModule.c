@@ -1,5 +1,6 @@
 /* sampleCodeModule.c */
 #include "lib.h"
+#include "commandDispatcher.h"
 char * v = (char*)0xB8000 + 79 * 2;
 
 static int var1 = 0;
@@ -33,7 +34,8 @@ int main() {
 
 	while(1){
 		char* buffer = scanf();
-		printf("Char %c String %s int %d", '1', "2", 3);
+		//printf("Char %c String %s int %d", '1', "2", 3);
+		commandSelector(buffer);
 	}
 
 	// **		Prueba básica de las exceptions			** //
