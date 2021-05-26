@@ -31,6 +31,10 @@ int main() {
 	// printNum(time);
 	// *************************************************** //
 
+	while(1){
+		char* buffer = scanf();
+		printf("Char %c String %s int %d", '1', "2", 3);
+	}
 
 	// **		Prueba básica de las exceptions			** //
 		// #include "exceptionTests.h"

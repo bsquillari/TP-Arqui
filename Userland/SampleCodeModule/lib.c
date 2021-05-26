@@ -1,5 +1,6 @@
 #include "lib.h"
 #include "sysCall.h"
+#include <stdarg.h>
 char buffer[40] = {0};
 
 
@@ -25,8 +26,40 @@ char* numToStr(int num){
 	return buffer+i+1;
 }
 
-void printf(char* string){
-	sysWrite(STDOUT,string, strlen(string));
+void printf(char* string, ...){
+	int i=0, argumentCount=0;
+	while(string[i]){
+		if(string[i] == '%') argumentCount++;
+		i++;
+	}
+	va_list list;
+	va_start(list, argumentCount);
+	while(*string){
+		if(*string=='\''){
+			string++;
+			sysWrite(STDOUT,string, 1);
+			string++;
+		}
+		else if(*string!='%'){
+			sysWrite(STDOUT,string, 1);
+			string++;
+		}
+		else{
+			string++;
+			switch (*string){
+			case 'd': printNum(va_arg(list, int));
+				break;
+			case 'c': putChar(va_arg(list, int));
+				break;
+			case 's': printf(va_arg(list, int));
+				break;
+			default:
+				break;
+			}
+			string++;
+		}
+	}
+	va_end(list);
 }
 
 void printNum(int num){
