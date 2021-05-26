@@ -14,6 +14,17 @@ int main() {
 		char* buffer = scanf();
 		printf("Char %c String %s int %d", '1', "2", 3);
 	}
+
+	// **		Prueba básica de las exceptions			** //
+		// #include "exceptionTests.h"
+		// divTest();
+	// *************************************************** //
+
+	// char a = getChar();
+	// putChar(a);
+	// char* buf = scanf();
+	// printf(buf);
+	// printf("bue");
 	//Test if BSS is properly set up
 	if (var1 == 0 && var2 == 0)
 		return 0xDEADC0DE;

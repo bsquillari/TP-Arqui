@@ -38,3 +38,8 @@ void printRegName(int index){
 	ncPrint(registersNames[index]);
 	ncPrint(":");
 }
+
+void printEOE(){
+	ncNewline();
+	ncPrint("Press any key to reset both shells.");
+}
