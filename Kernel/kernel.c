@@ -102,9 +102,16 @@ int main()
 	ncNewline();
 
 	ncPrint("[Finished]");
-	ncPrintHex(((EntryPoint)sampleCodeModuleAddress)());	//aca se hace el llamado a main de user
 
 	ncClear();
+	// char * buffer[5];
+	// read(0, buffer, 5);
+	// write(1, buffer, 5);
+
+	// read(0, buffer, 5);
+	// write(1, buffer, 5);
+	ncPrintHex(((EntryPoint)sampleCodeModuleAddress)());	//aca se hace el llamado a main de user
+
 	while (1){
 		_hlt();
 	}

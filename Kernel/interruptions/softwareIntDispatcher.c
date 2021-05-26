@@ -38,9 +38,13 @@ void read(unsigned int fd, char * buffer, unsigned int count){      // No toma e
         _sti();
         while(!getEndBuffer());
         char * inBuffer = getBuffer();
-        for (int i = 0; i < count && inBuffer[i]; i++)
+        int i;
+        for (i = 0; i < count && inBuffer[i]; i++)
         {
             buffer[i] = inBuffer[i];
         }
+
+        buffer[i++]='\n';
+        buffer[i]=0;
     }
 }

@@ -1,6 +1,6 @@
 #include "lib.h"
 #include "sysCall.h"
-static char buffer[40] = {0};
+char buffer[40] = {0};
 
 
 int strlen(char* string){
@@ -48,6 +48,7 @@ char getChar(){
 }
 
 char* scanf(){
+	buffer[0]=0;
 	sysRead(STDIN, buffer, MAX_BUFFER);
 	return buffer;
 }

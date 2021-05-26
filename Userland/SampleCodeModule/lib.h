@@ -1,7 +1,7 @@
 #ifndef _LIB_H_
 #define _LIB_H_
 
-#define STDIN 1
+#define STDIN 0
 #define STDOUT 1
 #define MAX_BUFFER 40
 #define STDERR 2

@@ -4,7 +4,7 @@
 #define BREAK_CODE(num) num>0x80
 
 
-static int keyDetected = 0;
+//static int keyDetected = 0;
 static int idx;
 
 static const char keyTable[] = {
@@ -19,13 +19,14 @@ static int bufferIdx=0;
 static int endBuffer = 0;
 void keyboard_handler(){
     idx = _keyHandler();
-    if(endBuffer){
+    if(BREAK_CODE(idx)) //es break code 
+        return;
+    else if(endBuffer){
         buffer[bufferIdx]=0;
         bufferIdx=0;
         endBuffer = 0;
     }
-    if(BREAK_CODE(idx)) //es break code 
-        keyDetected=0;
+    
     else if(idx == 0x1C) {   //code del enter
         ncNewline();
         endBuffer = 1;
@@ -45,8 +46,11 @@ void keyboard_handler(){
 }
 
 void cleanBuffer(){
-    ncNewline();
-    buffer[0]=0;
+    //ncNewline();
+    endBuffer=0;
+    for(int i = 0; i<64; i++){
+        buffer[i]=0;
+    }
     bufferIdx=0;
 }
 

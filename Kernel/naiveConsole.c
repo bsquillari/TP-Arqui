@@ -29,6 +29,10 @@ void ncPrintColor(const char * string, int color){
 void ncPrintChar(char character)
 {
 	ncScroll();
+	if(character=='\n') {
+		ncNewline();
+		return;
+	}
 	*currentVideo = character;
 	currentVideo += 2;
 }
@@ -105,6 +109,7 @@ void ncPrintBase(uint64_t value, uint32_t base)
 }
 
 void ncBackspace(){
+	if((int)(currentVideo-video)%(width*2)==0) return;
 	currentVideo-=2;
 	*currentVideo=' ';
 }
