@@ -19,6 +19,13 @@ void ncPrint(const char * string)
 		ncPrintChar(string[i]);
 }
 
+void ncPrintColor(const char * string, int color){
+	int i;
+
+	for (i = 0; string[i] != 0; i++)
+		ncPrintColorChar(string[i], color);
+}
+
 void ncPrintChar(char character)
 {
 	ncScroll();

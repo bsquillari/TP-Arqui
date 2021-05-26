@@ -14,10 +14,13 @@ GLOBAL _irq04Handler
 GLOBAL _irq05Handler
 
 GLOBAL _exception0Handler
+GLOBAL _exception6Handler
 
 EXTERN irqDispatcher
 EXTERN exceptionDispatcher
 EXTERN int_80
+EXTERN printRegName
+EXTERN ncPrintHex
 SECTION .text
 
 %macro pushState 0
@@ -75,12 +78,38 @@ SECTION .text
 %macro exceptionHandler 1
 	pushState
 
+	; Imprimo info del error y ubicación
 	mov rdi, %1 ; pasaje de parametro
+	mov rsi, [rsp+120]		; Le paso la direc de retorno (Instrucción de la exc.).
 	call exceptionDispatcher
 
+	;	Imprimo los registros, uso el stack.
+		call printRegs
+	
 	popState
+
+	call ripMachine		;	El usuario tiene que reiniciar la maquina
 	iretq
 %endmacro
+
+ripMachine:
+	nop
+	jmp ripMachine
+
+printRegs:
+	mov rbx, 0
+	mov rcx, rsp
+	add rcx, 8
+	nextReg:
+	mov rdi, rbx
+	call printRegName
+	mov rdi, [rcx]
+	call ncPrintHex
+	add rcx, 8
+	inc rbx
+	cmp rbx, 15
+	jne nextReg
+	ret
 
 
 _hlt:
@@ -149,6 +178,10 @@ _softwareHandler:
 ;Zero Division Exception
 _exception0Handler:
 	exceptionHandler 0
+
+;Invalid Opcode Exception
+_exception6Handler:
+	exceptionHandler 6
 
 haltcpu:
 	cli
