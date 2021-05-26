@@ -91,7 +91,6 @@ int main()
 	ncPrintHex((uint64_t)sampleCodeModuleAddress);
 	ncNewline();
 	ncPrint("  Calling the sample code module returned: ");
-	ncPrintHex(((EntryPoint)sampleCodeModuleAddress)());
 	ncNewline();
 	ncNewline();
 
@@ -103,6 +102,8 @@ int main()
 	ncNewline();
 
 	ncPrint("[Finished]");
+	ncPrintHex(((EntryPoint)sampleCodeModuleAddress)());	//aca se hace el llamado a main de user
+
 	ncClear();
 	while (1){
 		_hlt();
