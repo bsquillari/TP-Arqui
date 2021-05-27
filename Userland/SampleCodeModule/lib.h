@@ -7,8 +7,10 @@
 #define STDERR 2
 void putChar(char c);
 void printf(char* string, ...);
-void printNum(int num);
+void printDec(int num);
 void printer(char* string);
+int strToNum(char* str);
+char* numToStr(int num, int base);
 void printHex(int num);
 char getChar();
 char* scanf();

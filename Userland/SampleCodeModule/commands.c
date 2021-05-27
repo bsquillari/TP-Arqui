@@ -35,7 +35,7 @@ int isCommandWithArg(char* command, char* buffer){ //1 si son iguales, 0 si no
 	return 0;
 }
 
-void getArgument(char* buffer, char* arg){
+void getArguments(char* buffer, char* arg){
     int buffLen=strlen(buffer);
     int i;
     for(i=0;buffer[i]!= ' ';i++);
@@ -60,7 +60,7 @@ void helpCommand(){
     printf("inforeg: print every register with its value\n");
     printf("Syntaxis: &> inforeg\n\n");
     printf("printmem: 32bytes from the direction passed by argument\n");
-    printf("Syntaxis: &> inforeg [DIRECTION]\n\n");
+    printf("Syntaxis: &> printmem [DIRECTION](decimal)\n\n");
     printf("date: show real time live\n");
     printf("Syntaxis: &> date\n");
 
@@ -75,15 +75,24 @@ void printRegName(int index){
 }
 
 void inforegCommand(){
-    //printRegs();
+    printRegs();
+    printf("\n");
 }
 
 
 void printmemCommand(char* buffer){
     char arg[MAX_BUFFER];
-    getArgument(buffer,arg);
-    //pasarlo a numero
-    //llamar funcion asm para tomar lo que hay en la direc de memoria
+    
+    getArguments(buffer,arg);
+    int direction=strToNum(arg);
+    if(direction>=0){ //&& direction <= DIREC_MAX)
+        int value=readDirection(direction);
+        printf("%d: %d\n",direction,value);
+    }else{
+        printer("Direccion invalida");
+        printf("\n");
+    }   
+    
    
 
 }

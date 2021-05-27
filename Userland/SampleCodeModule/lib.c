@@ -1,7 +1,7 @@
 #include "lib.h"
 #include "sysCall.h"
 #include <stdarg.h>
-char buffer[40] = {0};
+char buffer[MAX_BUFFER] = {0};
 
 
 int strlen(char* string){
@@ -13,7 +13,37 @@ int strlen(char* string){
 	return i;
 }
 
-char* numToStr(int num){
+static void cleanBuffer(){
+	for(int i=0; i < MAX_BUFFER; i++){
+		buffer[i]=0;
+	}
+}
+
+
+static char hexArray[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+char* numToStr(int num, int base){
+	//cleanBuffer();
+    char aux = num%base;
+    int i = MAX_BUFFER;
+    buffer[i]=0;
+	if(num==0)
+		buffer[i--]='0';
+    while(i>=0 && num>0){
+        aux = num%base;
+        buffer[i]=hexArray[aux];
+        i--;
+        num/=base;
+    }
+    if(base==16){
+        buffer[i--]='x';
+        buffer[i--]='0';
+
+    }
+
+    return buffer+i+1;
+}
+
+/*char* numToStr(int num){
 	char aux = num%10;
 	int i = MAX_BUFFER;
 	buffer[i]=0;
@@ -24,6 +54,18 @@ char* numToStr(int num){
 		num/=10;
 	}
 	return buffer+i+1;
+}*/
+
+int strToNum(char* str){
+    int num=0;
+    
+    for(int i=0; str[i] ; i++){
+        num*=10;
+        if(str[i]<'0' || str[i]>'9' )//no es un numero valido
+            return -1;
+        num+=str[i]-'0';
+    }
+    return num;
 }
 
 void printf(char* string, ...){
@@ -47,7 +89,7 @@ void printf(char* string, ...){
 		else{
 			string++;
 			switch (*string){
-			case 'd': printNum(va_arg(list, int));
+			case 'd': printDec(va_arg(list, int));
 				break;
 			case 'c': putChar(va_arg(list, int));
 				break;
@@ -62,12 +104,12 @@ void printf(char* string, ...){
 	va_end(list);
 }
 
-void printNum(int num){
-	printf(numToStr(num));
+void printDec(int num){
+	printf(numToStr(num,10));
 }
 
 void printHex(int num){
-	
+	printf(numToStr(num,16));
 }
 
 void printer(char* string){
