@@ -22,7 +22,7 @@ void cleanBuffer(){
 
 static char hexArray[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
 char* numToStr(int num, int base){
-	//cleanBuffer();
+	cleanBuffer();
     char aux = num%base;
     int i = MAX_BUFFER;
     buffer[i]=0;
@@ -44,7 +44,7 @@ char* numToStr(int num, int base){
 }
 
 char* numToTime(int num){
-	//cleanBuffer();
+	cleanBuffer();
     char aux = num%16;
     int i = MAX_BUFFER;
     buffer[i]=0;
