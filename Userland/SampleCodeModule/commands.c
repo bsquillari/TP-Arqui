@@ -144,7 +144,7 @@ void printmemCommand(char* buffer){
 
 
 void dateCommand(){
-    printTime(sysTime(HOURS)-3);
+    printTime(sysTime(HOURS));
     printf(":");
     printTime(sysTime(MINUTES));
     printf(":");
