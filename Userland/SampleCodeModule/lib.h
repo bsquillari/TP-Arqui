@@ -5,12 +5,16 @@
 #define STDOUT 1
 #define MAX_BUFFER 40
 #define STDERR 2
+int strlen(char* string);
 void putChar(char c);
 void printf(char* string, ...);
 void printDec(int num);
 void printer(char* string);
 int strToNum(char* str);
 char* numToStr(int num, int base);
+char* numToTime(int num);
+void printTime(int num);
+void cleanBuffer();
 void printHex(int num);
 char getChar();
 char* scanf();

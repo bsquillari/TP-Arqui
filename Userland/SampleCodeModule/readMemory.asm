@@ -43,7 +43,7 @@ section .text
 
 readDirection:
 	xor rax,rax
-	mov eax,dword[rdi] ;leo solo 32 bytes
+	mov rax,[rdi] 
 	ret
 
 

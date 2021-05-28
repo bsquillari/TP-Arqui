@@ -1,7 +1,13 @@
 #include "commands.h"
 #include "lib.h"
+#include "sysCall.h"
 
-
+#define SECONDS 0
+#define MINUTES 2
+#define HOURS 4
+#define DAY 7
+#define MONTH 8
+#define YEAR 9
 
 int isCommand(char* command, char* buffer){ //1 si son iguales, 0 si no
 	int comLen=strlen(command);
@@ -85,9 +91,16 @@ void printmemCommand(char* buffer){
     
     getArguments(buffer,arg);
     int direction=strToNum(arg);
-    if(direction>=0){ //&& direction <= DIREC_MAX)
-        int value=readDirection(direction);
-        printf("%d: %d\n",direction,value);
+    if(direction>=0){ //&& direction <= DIREC_MAX-32){
+        for(int i=0;i!=32;i+=8){
+            //imprimo 4 bloques de 8bytes al ser una arquitectura de 64 bits
+            int value=readDirection(direction+i);
+            cleanBuffer();
+            printf("%s:",numToStr(direction+i,16));
+            cleanBuffer();
+            printf("%s     ",numToStr(value,16));
+        }
+        printf("\n");
     }else{
         printer("Direccion invalida");
         printf("\n");
@@ -99,5 +112,17 @@ void printmemCommand(char* buffer){
 
 
 void dateCommand(){
-    //systime
+    printTime(sysTime(HOURS)-3);
+    printf(":");
+    printTime(sysTime(MINUTES));
+    printf(":");
+    printTime(sysTime(SECONDS));
+    printf(" of ");
+    printTime(sysTime(DAY));
+    printf("/");
+    printTime(sysTime(MONTH));
+    printf("/");
+    printTime(sysTime(YEAR));
+    printf("\n");
+    
 }
