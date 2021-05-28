@@ -34,6 +34,7 @@ int main() {
 
 	while(1){
 		char* buffer = scanf();
+		// printf(buffer);
 		//printf("Char %c String %s int %d", '1', "2", 3);
 		commandSelector(buffer);
 	}

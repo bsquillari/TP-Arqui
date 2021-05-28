@@ -1,4 +1,5 @@
 #include <naiveConsole.h>
+#include <interrupts.h>
 #include <keyboard.h>
 #define RED 4
 void write(unsigned int fd, const char * buffer, unsigned int count);
@@ -40,15 +41,16 @@ void read(unsigned int fd, char * buffer, unsigned int count){      // No toma e
     if(fd==0){      // STDIN
         cleanBuffer();
         _sti();
-        while(!getEndBuffer());
+        while(!getEndBuffer()){
+		_hlt();
+        }
         char * inBuffer = getBuffer();
         int i;
-        for (i = 0; i < count && inBuffer[i]; i++)
+        for (i = 0; i < count && inBuffer[i]!=0; i++)
         {
             buffer[i] = inBuffer[i];
         }
-
-        buffer[i++]='\n';
         buffer[i]=0;
+        cleanBuffer();
     }
 }

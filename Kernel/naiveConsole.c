@@ -10,6 +10,8 @@ static uint8_t * currentVideo = (uint8_t*)0xB8000;
 static const uint32_t width = 80;
 static const uint32_t height = 25 ;
 static uint8_t shellSelector = 1;
+static uint8_t * previousVideo = 0xB8F00;
+//static uint8_t * previousVideo = video + (height-1)*width*2;
 
 void ncPrint(const char * string)
 {
@@ -57,11 +59,14 @@ void ncScroll(){
 }
 
 void ncSwitchShell(){
+	uint8_t* aux = currentVideo;
+	currentVideo = previousVideo;
+	previousVideo = aux;
 	shellSelector=1-shellSelector;
-	currentVideo = (shellSelector)?video+(height-2)/2*width*2:video + (height-1)*width*2;
-	for(uint8_t i = 0; i<width*2;i+=2){
-		currentVideo[i]=' ';
-	}
+	//currentVideo = (shellSelector)?video+(height-2)/2*width*2:video + (height-1)*width*2;
+	// for(uint8_t i = 0; i<width*2;i+=2){
+	// 	currentVideo[i]=' ';
+	// }
 }
 
 void ncNewline(){
