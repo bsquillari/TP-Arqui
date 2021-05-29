@@ -66,7 +66,7 @@ void helpCommand(){
     printf("inforeg: print every register with its value\n");
     printf("Syntaxis: &> inforeg\n\n");
     printf("printmem: 32bytes from the direction passed by argument\n");
-    printf("Syntaxis: &> printmem [DIRECTION](decimal)\n\n");
+    printf("Syntaxis: &> printmem [DIRECTION](hexa)\n\n");
     printf("date: show real time live\n");
     printf("Syntaxis: &> date\n");
 
@@ -122,12 +122,15 @@ void printmemCommand(char* buffer){
     char arg[MAX_BUFFER];
     
     getArguments(buffer,arg);
-    int direction=strToNum(arg);
+    int direction=hexToDec(arg);
     if(direction>=0){ //&& direction <= DIREC_MAX-32){
-        for(int i=0;i!=32;i+=8){
-            //imprimo 4 bloques de 8bytes al ser una arquitectura de 64 bits
+        for(int i=0;i<=32;i+=4){
+            //imprimo 4 bloques de 4bytes al ser una arquitectura de 64 bits
             int value=readDirection(direction+i);
-            
+            int low=value>>16;
+            value=value<<16;
+            value+=low;
+
             printf("%s:",numToStr(direction+i,16));
 
             printf("%s     ",numToStr(value,16));

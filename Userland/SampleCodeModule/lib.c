@@ -19,6 +19,18 @@ void cleanBuffer(){
 	}
 }
 
+int hexToDec(char* string){
+	int resp=0;
+	while(*string){
+		resp*=16;
+		if(! ((*string>='0' && *string<='9') || (*string>='a' && *string<='f')) )
+			return -1;
+		resp+=(*string>='0' && *string<='9')?*string-'0':*string-'a'+10;
+		string++;
+	}
+
+	return resp;
+}
 
 static char hexArray[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
 char* numToStr(int num, int base){

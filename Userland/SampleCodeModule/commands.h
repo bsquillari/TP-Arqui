@@ -7,7 +7,7 @@ int isCommandWithArg(char* command, char* buffer);
 void helpCommand();
 void inforegCommand();
 void printRegName(int index);
-int readDirection(int direction);
+long readDirection(int direction);
 void getArguments(char* buffer, char* arg);
 void printRegs();
 void printmemCommand(char* buffer);

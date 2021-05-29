@@ -2,10 +2,11 @@
 #include <naiveConsole.h>
 
 #define BREAK_CODE(num) num>0x80
-
+#define IS_LETTER(c) ((c>='a') && (c<='z'))
 
 //static int keyDetected = 0;
 static int idx;
+static int capsLock = 0;
 
 static const char keyTable[] = {
 	0, 0, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '\'', '¿',0, 0,
@@ -22,7 +23,7 @@ static int* bufferIdx=&idx1;
 static int endBuffer = 0;
 void keyboard_handler(){
     idx = _keyHandler();
-    
+    // ncPrintHex(idx);
     if(endBuffer){
         currentBuffer[*bufferIdx]=0;
         *bufferIdx=0;
@@ -35,6 +36,9 @@ void keyboard_handler(){
         currentBuffer[(*bufferIdx)++]='\n';
         currentBuffer[(*bufferIdx)++]=0;
         endBuffer = 1;
+    }
+    else if(idx == 0x3A){
+        capsLock = 1-capsLock;
     }
     else if(idx == 0x0E){   //code del delete
         ncBackspace();
@@ -53,7 +57,8 @@ void keyboard_handler(){
     }
     else{
         currentBuffer[(*bufferIdx)++]=keyTable[idx];
-        ncPrintChar(keyTable[idx]);
+        char toPrint = keyTable[idx];
+        ncPrintChar((capsLock && IS_LETTER(toPrint))?toPrint-'a'+'A':toPrint);
         }
 }
 

@@ -18,4 +18,5 @@ void cleanBuffer();
 void printHex(int num);
 char getChar();
 char* scanf();
+int hexToDec(char* num);
 #endif
