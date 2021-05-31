@@ -35,11 +35,12 @@ static void invalid_opcode(){
 static char * registersNames[] = {"RAX", "RBX", "RCX", "RDX", "RBP", "RSI", "RDI", "R8", "R9", "R10", "R11", "R12", "R13", "R14", "R15"};
 void printRegName(int index){
 	ncPrintChar(' ');
-	ncPrint(registersNames[index]);
+	ncPrintColor(registersNames[14-index], RED);
 	ncPrint(":");
 }
 
 void printEOE(){
 	ncNewline();
-	ncPrint("Press any key to reset both shells.");
+	ncPrint("Press enter to reset both shells.");
+	ncNewline();
 }

@@ -104,16 +104,7 @@ int main()
 	ncPrint("[Finished]");
 
 	ncClear();
-	// char * buffer[5];
-	// read(0, buffer, 5);
-	// write(1, buffer, 5);
-
-	// read(0, buffer, 5);
-	// write(1, buffer, 5);
 	((EntryPoint)sampleCodeModuleAddress)();	//aca se hace el llamado a main de user
 
-	while (1){
-		_hlt();
-	}
 	return 0;
 }

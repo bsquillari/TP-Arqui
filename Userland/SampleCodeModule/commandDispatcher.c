@@ -11,6 +11,8 @@ void commandSelector(char* buffer){
         printmemCommand(buffer);
     }else if(isCommand("date", buffer)){
         dateCommand();
+    }else if(isCommandWithArg("exceptiontest",buffer)){
+        exceptionTestCommando(buffer);
     }else{
         printer("Command not found");
         printf("\n");

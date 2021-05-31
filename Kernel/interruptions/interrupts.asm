@@ -16,7 +16,7 @@ GLOBAL _irq05Handler
 GLOBAL _exception0Handler
 GLOBAL _exception6Handler
 
-EXTERN loader
+EXTERN main
 EXTERN getEndBuffer
 EXTERN printEOE
 
@@ -25,6 +25,7 @@ EXTERN exceptionDispatcher
 EXTERN int_80
 EXTERN printRegName
 EXTERN ncPrintHex
+EXTERN ncNewline
 SECTION .text
 
 %macro pushState 0
@@ -94,10 +95,10 @@ SECTION .text
 
 	;	Espero una tecla del usuario y luego reinicio el kernel.
 	call printEOE
-	sti
+	call _hlt
 	call _hlt
 	pop rax
-	push loader
+	push main
 	iretq
 %endmacro
 
@@ -107,10 +108,14 @@ printRegs:
 	mov rcx, rsp
 	add rcx, 8
 	nextReg:
+	push rcx
 	mov rdi, rbx
 	call printRegName
+	pop rcx
+	push rcx
 	mov rdi, [rcx]
 	call ncPrintHex
+	pop rcx
 	add rcx, 8
 	inc rbx
 	cmp rbx, 15

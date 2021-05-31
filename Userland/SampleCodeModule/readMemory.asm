@@ -1,7 +1,7 @@
 
 extern printRegName
 extern printHex
-global printRegs
+
 global readDirection
 
 global readRAX
@@ -116,19 +116,3 @@ readR15:
 	mov rax,r15
 	ret
 	
-printRegs:
-	pushState
-	mov rbx, 0
-	mov rcx, rsp
-	add rcx, 8
-	nextReg:
-	mov rdi, rbx
-	call printRegName
-	mov rdi, [rcx]
-	call printHex
-	add rcx, 8
-	inc rbx
-	cmp rbx, 15
-	jne nextReg
-	popState
-	ret

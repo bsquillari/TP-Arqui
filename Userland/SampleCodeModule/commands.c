@@ -1,6 +1,7 @@
 #include "commands.h"
 #include "lib.h"
 #include "sysCall.h"
+#include "exceptionTests.h"
 
 #define SECONDS 0
 #define MINUTES 2
@@ -59,17 +60,26 @@ void getArguments(char* buffer, char* arg){
     }
 }
 
-
+#define commandsQuantity 5
 void helpCommand(){
-    printf("help: display every command available\n");
-    printf("Syntaxis: &> help\n\n");
-    printf("inforeg: print every register with its value\n");
-    printf("Syntaxis: &> inforeg\n\n");
-    printf("printmem: 32bytes from the direction passed by argument\n");
-    printf("Syntaxis: &> printmem [DIRECTION](hexa)\n\n");
-    printf("date: show real time live\n");
-    printf("Syntaxis: &> date\n");
-
+    static char * strings[][2] = {
+        {"help: display every command available\n","&> help\n"},
+        {"inforeg: print every register with its value\n","&> inforeg\n"},
+        {"printmem: 32bytes from the direction passed by argument\n","&> printmem [DIRECTION](hexa)\n"},
+        {"date: show real time live\n","&> date\n"},
+        {"exceptionTest: Test exception routines. 0: Division by 0. 6: Invalid operation code.\n","&> exceptionTest [Exception ID]\n"}
+    };
+    for (int i = 0; i < commandsQuantity; i++)
+    {
+        printf("@ ");
+        printf(strings[i][0]);
+        printf("Syntax: ");
+        printf(strings[i][1]);
+        if(i!=commandsQuantity-1){
+        printf("Press enter to see next command.");
+        scanf();
+        }
+    }
 }
 
 
@@ -160,4 +170,26 @@ void dateCommand(){
     printTime(sysTime(YEAR));
     printf("\n");
     
+}
+
+void exceptionTestCommando(char * buffer){
+    char arg[MAX_BUFFER];
+    
+    getArguments(buffer,arg);
+    int num=strToNum(arg);
+    if(num<0){
+        printf("ID de excepcion invalido.\n");
+    }else{
+        switch (num)
+        {
+        case 0:
+            divTest();
+            break;
+        case 6:
+            opCodeTest();
+            break;
+        default:
+            break;
+        }
+    }
 }
