@@ -31,11 +31,19 @@ int main() {
 
 	// printNum(time);
 	// *************************************************** //
-
+	static char c;
+	static char buffer[MAX_BUFFER]={0};
+	static int idx=0;
 	while(1){
-		char* buffer = scanf();
-		// printf(buffer);
-		//printf("Char %c String %s int %d", '1', "2", 3);
+		while((c=getChar())!='\n'){
+			putChar(c);
+			buffer[idx]=c;
+			idx++;
+		}
+		putChar('\n');
+		buffer[idx++]='\n';
+		buffer[idx++]=0;
+		idx=0;
 		commandSelector(buffer);
 	}
 

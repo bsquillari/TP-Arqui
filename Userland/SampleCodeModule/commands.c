@@ -69,15 +69,16 @@ void helpCommand(){
         {"date: show real time live\n","&> date\n"},
         {"exceptionTest: Test exception routines. 0: Division by 0. 6: Invalid operation code.\n","&> exceptionTest [Exception ID]\n"}
     };
-    for (int i = 0; i < commandsQuantity; i++)
+    static int i;
+    for (i = 0; i < commandsQuantity; i++)
     {
         printf("@ ");
         printf(strings[i][0]);
         printf("Syntax: ");
         printf(strings[i][1]);
         if(i!=commandsQuantity-1){
-        printf("Press enter to see next command.");
-        scanf();
+        printf("Press enter to see next command.\n");
+        getChar();
         }
     }
 }

@@ -39,17 +39,18 @@ void write(unsigned int fd, const char * buffer, unsigned int count){       // N
 
 void read(unsigned int fd, char * buffer, unsigned int count){      // No toma en cuenta files, por ahora
     if(fd==0){      // STDIN
-        cleanBuffer();
-        _sti();
-        while(!getEndBuffer()){
-		_hlt();
+        //cleanBuffer();
+        //_sti();
+        while(getEndBuffer()!=count){
+		    _hlt();
         }
         char * inBuffer = getBuffer();
         int i;
-        for (i = 0; i < count && inBuffer[i]!=0; i++)
+        for (i = 0; i < count ; i++)
         {
             buffer[i] = inBuffer[i];
         }
+        //ncPrint("LLEGO");
         buffer[i]=0;
         cleanBuffer();
     }

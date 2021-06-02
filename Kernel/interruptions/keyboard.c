@@ -32,16 +32,16 @@ void keyboard_handler(){
     if(BREAK_CODE(idx)) //es break code 
         return;
     else if(idx == 0x1C) {   //code del enter
-        ncNewline();
+        //ncNewline();
         currentBuffer[(*bufferIdx)++]='\n';
-        currentBuffer[(*bufferIdx)++]=0;
-        endBuffer = 1;
+        //currentBuffer[(*bufferIdx)++]=0;
+        //endBuffer = 1;
     }
     else if(idx == 0x3A){
         capsLock = 1-capsLock;
     }
     else if(idx == 0x0E){   //code del delete
-        ncBackspace();
+        //ncBackspace();
         (*bufferIdx)--;
     }
     else if(idx == 0xF){    //code del TAB
@@ -56,15 +56,15 @@ void keyboard_handler(){
         }
     }
     else{
-        currentBuffer[(*bufferIdx)++]=keyTable[idx];
         char toPrint = keyTable[idx];
-        ncPrintChar((capsLock && IS_LETTER(toPrint))?toPrint-'a'+'A':toPrint);
+        currentBuffer[(*bufferIdx)++]=(capsLock && IS_LETTER(toPrint))?toPrint-'a'+'A':toPrint;
+        //ncPrintChar((capsLock && IS_LETTER(toPrint))?toPrint-'a'+'A':toPrint);
         }
 }
 
 void cleanBuffer(){
     //ncNewline();
-    endBuffer=0;
+    endBuffer=1;
     for(int i = 0; i<64; i++){
         currentBuffer[i]=0;
     }
@@ -72,7 +72,7 @@ void cleanBuffer(){
 }
 
 int getEndBuffer(){
-    return endBuffer;
+    return (*bufferIdx);
 }
 
 char * getBuffer(){

@@ -126,6 +126,7 @@ printRegs:
 _hlt:
 	sti
 	hlt
+	cli
 	ret
 
 _cli:
