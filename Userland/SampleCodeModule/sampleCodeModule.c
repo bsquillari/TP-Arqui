@@ -8,13 +8,6 @@ static int var2 = 0;
 
 
 int main() {
-	
-	
-
-	// while(1){
-	// 	char* buffer = scanf();
-	// 	//printf(buffer);
-	// }
 
 	// **		Prueba básica de las sysTime			** //
 	// #include "sysCall.h"
@@ -43,7 +36,7 @@ int main() {
 		while((c=getChar())!='\n'){
 			putChar(c);
 			if(c=='\b')
-			idx--;
+			(*idx)--;
 			else if(c=='\t'){
 				bufferID = (bufferID+1)%2;
 				if(bufferID){
@@ -71,10 +64,5 @@ int main() {
 		// divTest();
 	// *************************************************** //
 
-	// char a = getChar();
-	// putChar(a);
-	// char* buf = scanf();
-	// printf(buf);
-	// printf("bue");
 	return 0;
 }

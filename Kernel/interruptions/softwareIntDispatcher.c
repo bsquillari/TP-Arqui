@@ -2,24 +2,16 @@
 #include <interrupts.h>
 #include <keyboard.h>
 #define RED 4
+typedef int (*EntryPoint)(unsigned int, unsigned int, unsigned int);
+
 void write(unsigned int fd, const char * buffer, unsigned int count);
 void read(unsigned int fd, char * buffer, unsigned int count);
 int accessClock(unsigned int mode);
+EntryPoint functionPtrs[] = {&write, &read, &accessClock};
+
 int int_80(unsigned int arg1, unsigned int arg2, unsigned int arg3, int sysCall){
-    switch (sysCall)        // Miro el valor de rax
-    {
-    case 0:
-        write(arg1, arg2, arg3);
-        break;
-    case 1:
-        read(arg1, arg2, arg3);
-        break;
-    case 2:             // Decido que el 2 hace referencia al RTC.
-        return accessClock(arg1);
-        break;
-    default:
-        break;
-    }
+    functionPtrs[sysCall](arg1, arg2, arg3);
+    return;
 }
 
 void write(unsigned int fd, const char * buffer, unsigned int count){       // No toma en cuenta files, por ahora
@@ -39,8 +31,6 @@ void write(unsigned int fd, const char * buffer, unsigned int count){       // N
 
 void read(unsigned int fd, char * buffer, unsigned int count){      // No toma en cuenta files, por ahora
     if(fd==0){      // STDIN
-        //cleanBuffer();
-        //_sti();
         while(getEndBuffer()!=count){
 		    _hlt();
         }
@@ -50,7 +40,7 @@ void read(unsigned int fd, char * buffer, unsigned int count){      // No toma e
         {
             buffer[i] = inBuffer[i];
         }
-        buffer[i]=0;            // ??????
+        //buffer[i]=0;            // ??????
         cleanBuffer();
     }
 }

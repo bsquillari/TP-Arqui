@@ -2,6 +2,7 @@
 #include "sysCall.h"
 #include <stdarg.h>
 char buffer[MAX_BUFFER] = {0};
+static char string[MAX_BUFFER] = {0};
 
 
 int strlen(char* string){
@@ -72,18 +73,6 @@ char* numToTime(int num){
 
     return buffer+i+1;
 }
-/*char* numToStr(int num){
-	char aux = num%10;
-	int i = MAX_BUFFER;
-	buffer[i]=0;
-	while(i>=0 && num>0){
-		aux = num%10;
-		buffer[i]='0'+aux;
-		i--;
-		num/=10;
-	}
-	return buffer+i+1;
-}*/
 
 int strToNum(char* str){
     int num=0;
@@ -161,10 +150,10 @@ char getChar(){
 
 char* scanf(){
 	buffer[0]=0;
-	int idx = 0;
-	char c;
+	static int idx = 0;
+	static char c;
 	while((c=getChar())!='\n'){
-			if(c!='\t')
+			if(c=='\t')
 				continue;
 			putChar(c);
 			if(c=='\b')
