@@ -77,10 +77,12 @@ void helpCommand(){
         printf("Syntax: ");
         printf(strings[i][1]);
         if(i!=commandsQuantity-1){
-        printf("Press enter to see next command.\n");
+        printf("Press ANY key to see next command.\n");
         getChar();
+        putChar('\n');
         }
     }
+    printf("End of help.\n");
 }
 
 
@@ -190,6 +192,7 @@ void exceptionTestCommando(char * buffer){
             opCodeTest();
             break;
         default:
+            printf("ID de excepcion invalido.\n");
             break;
         }
     }

@@ -41,6 +41,6 @@ void printRegName(int index){
 
 void printEOE(){
 	ncNewline();
-	ncPrint("Press enter to reset both shells.");
+	ncPrint("Press ANY key to reset both shells.");
 	ncNewline();
 }

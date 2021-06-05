@@ -50,8 +50,7 @@ void read(unsigned int fd, char * buffer, unsigned int count){      // No toma e
         {
             buffer[i] = inBuffer[i];
         }
-        //ncPrint("LLEGO");
-        buffer[i]=0;
+        buffer[i]=0;            // ??????
         cleanBuffer();
     }
 }

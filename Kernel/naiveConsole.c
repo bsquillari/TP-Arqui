@@ -1,4 +1,5 @@
 #include <naiveConsole.h>
+#include <keyboard.h>
 
 #define GREY 7
 
@@ -31,8 +32,14 @@ void ncPrintColor(const char * string, int color){
 void ncPrintChar(char character)
 {
 	ncScroll();
-	if(character=='\n') {
+	if(character=='\n') {			// Enter
 		ncNewline();
+		return;
+	}else if(character=='\t'){		// Tab (switch shell)
+		ncSwitchShell();
+		return;
+	}else if(character=='\b'){		// Backspace
+		ncBackspace();
 		return;
 	}
 	*currentVideo = character;

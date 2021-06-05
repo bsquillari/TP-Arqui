@@ -15,64 +15,46 @@ static const char keyTable[] = {
     'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '-', 
     0, '*', 0, ' ',0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '7','↑', '9', '-', '←', '5', '→', '+', '1', '↓', '3', 0, 0, 0, 0,0, 0, 0, 0, 0, 0, 0, 0, 0
 };
-static char buffer1[64] = {0};
-static char buffer2[64] = {0};
-static char* currentBuffer=buffer1;
-static int idx1=0, idx2=0;
-static int* bufferIdx=&idx1;
+static char* currentBuffer[64]={0};
+static int bufferIdx=0;
 static int endBuffer = 0;
 void keyboard_handler(){
     idx = _keyHandler();
-    // ncPrintHex(idx);
     if(endBuffer){
-        currentBuffer[*bufferIdx]=0;
-        *bufferIdx=0;
+        currentBuffer[bufferIdx]=0;
+        bufferIdx=0;
         endBuffer = 0;
     }
     if(BREAK_CODE(idx)) //es break code 
         return;
     else if(idx == 0x1C) {   //code del enter
-        //ncNewline();
-        currentBuffer[(*bufferIdx)++]='\n';
-        //currentBuffer[(*bufferIdx)++]=0;
-        //endBuffer = 1;
+        currentBuffer[(bufferIdx)++]='\n';
     }
     else if(idx == 0x3A){
         capsLock = 1-capsLock;
     }
     else if(idx == 0x0E){   //code del delete
-        //ncBackspace();
-        (*bufferIdx)--;
+        currentBuffer[(bufferIdx)++]='\b';
     }
     else if(idx == 0xF){    //code del TAB
-        ncSwitchShell();
-        if(currentBuffer==buffer1){
-            bufferIdx=&idx2;
-            currentBuffer=buffer2;
-        }
-        else {
-            currentBuffer=buffer1;
-            bufferIdx=&idx1;
-        }
+        currentBuffer[(bufferIdx)++]='\t';
     }
     else{
         char toPrint = keyTable[idx];
-        currentBuffer[(*bufferIdx)++]=(capsLock && IS_LETTER(toPrint))?toPrint-'a'+'A':toPrint;
-        //ncPrintChar((capsLock && IS_LETTER(toPrint))?toPrint-'a'+'A':toPrint);
+        currentBuffer[(bufferIdx)++]=(capsLock && IS_LETTER(toPrint))?toPrint-'a'+'A':toPrint;
         }
 }
 
 void cleanBuffer(){
-    //ncNewline();
     endBuffer=1;
     for(int i = 0; i<64; i++){
         currentBuffer[i]=0;
     }
-    (*bufferIdx)=0;
+    (bufferIdx)=0;
 }
 
 int getEndBuffer(){
-    return (*bufferIdx);
+    return (bufferIdx);
 }
 
 char * getBuffer(){

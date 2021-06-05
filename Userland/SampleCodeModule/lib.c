@@ -161,6 +161,21 @@ char getChar(){
 
 char* scanf(){
 	buffer[0]=0;
-	sysRead(STDIN, buffer, MAX_BUFFER);
+	int idx = 0;
+	char c;
+	while((c=getChar())!='\n'){
+			if(c!='\t')
+				continue;
+			putChar(c);
+			if(c=='\b')
+			idx--;
+			else{
+			buffer[idx]=c;
+			(idx)++;
+			}
+		}
+		putChar('\n');
+		buffer[(idx)++]='\n';
+		buffer[(idx)++]=0;
 	return buffer;
 }
