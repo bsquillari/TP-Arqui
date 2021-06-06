@@ -20,8 +20,8 @@ void cleanBuffer(){
 	}
 }
 
-int hexToDec(char* string){
-	int resp=0;
+unsigned long int hexToDec(char* string){
+	unsigned long int resp=0;
 	while(*string){
 		resp*=16;
 		if(! ((*string>='0' && *string<='9') || (*string>='a' && *string<='f')) )
@@ -34,7 +34,7 @@ int hexToDec(char* string){
 }
 
 static char hexArray[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
-char* numToStr(int num, int base){
+char* numToStr(unsigned long int num, int base){
 	cleanBuffer();
     char aux = num%base;
     int i = MAX_BUFFER;

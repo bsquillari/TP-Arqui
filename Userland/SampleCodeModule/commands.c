@@ -137,8 +137,8 @@ void printmemCommand(char* buffer){
     char arg[MAX_BUFFER];
     
     getArguments(buffer,arg);
-    int direction=hexToDec(arg);
-    if(direction>=0){ //&& direction <= DIREC_MAX-32){
+    unsigned long int direction=hexToDec(arg);
+    if(direction>=0 && direction <= hexToDec("ffffffff")-32){
         for(int i=0;i<=32;i+=4){
             //imprimo 8 bloques de 4bytes al ser una arquitectura de 64 bits
             int value=readDirection(direction+i);
@@ -146,9 +146,9 @@ void printmemCommand(char* buffer){
             value=value<<16;
             value+=low;
 
-            printf("%s:",numToStr(direction+i,16));
+            printer(numToStr(direction+i,16));
 
-            printf("%s     ",numToStr(value,16));
+            printf(": %s   ",numToStr(value,16));
         }
         printf("\n");
     }else{
@@ -182,19 +182,7 @@ void exceptionTestCommando(char * buffer){
     
     getArguments(buffer,arg);
     int num=strToNum(arg);
-    if(num==0)
-        divTest();
-    else if(num==6)
-        opCodeTest();
-    else{
-        printer("Exception ID is not valid");
-        printf("\n");
-    }
-    /*if(num<0){
-        printf("ID de excepcion invalido.\n");
-    }else{
-        switch (num)
-        {
+    switch (num){
         case 0:
             divTest();
             break;
@@ -202,8 +190,9 @@ void exceptionTestCommando(char * buffer){
             opCodeTest();
             break;
         default:
-            printf("ID de excepcion invalido.\n");
+            printer("Exception ID is not valid");
+            printf("\n");
             break;
-        }
-    }*/
+    }
+    
 }

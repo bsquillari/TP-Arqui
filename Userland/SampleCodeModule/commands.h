@@ -9,7 +9,7 @@ void inforegCommand(int op);
 void printRegName(int index);
 void printRegs();
 
-long readDirection(int direction);
+long readDirection(unsigned long int direction);
 void getArguments(char* buffer, char* arg);
 void exceptionTestCommando(char * buffer);
 void printmemCommand(char* buffer);

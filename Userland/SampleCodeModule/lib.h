@@ -11,10 +11,10 @@ void printf(char* string, ...);
 void printDec(int num);
 void printer(char* string);
 int strToNum(char* str);
-char* numToStr(int num, int base);
+char* numToStr(unsigned long int num, int base);
 void cleanBuffer();
 void printHex(int num);
 char getChar();
 char* scanf();
-int hexToDec(char* num);
+unsigned long int hexToDec(char* num);
 #endif
