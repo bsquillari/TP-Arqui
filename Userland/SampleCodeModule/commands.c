@@ -67,7 +67,7 @@ void helpCommand(){
         {"inforeg: print every register with its value\n","&> inforeg\n"},
         {"printmem: 32bytes from the direction passed by argument\n","&> printmem [DIRECTION](hexa)\n"},
         {"date: show real time live\n","&> date\n"},
-        {"exceptionTest: Test exception routines. 0: Division by 0. 6: Invalid operation code.\n","&> exceptionTest [Exception ID]\n"}
+        {"exceptiontest: Test exception routines. 0: Division by 0. 6: Invalid operation code.\n","&> exceptiontest [Exception ID]\n"}
     };
     static int i;
     for (i = 0; i < commandsQuantity; i++)
@@ -89,12 +89,13 @@ void helpCommand(){
 static char * registersNames[] = {"RAX", "RBX", "RCX", "RDX", "RBP", "RSI", "RDI", "R8", "R9", "R10", "R11", "R12", "R13", "R14", "R15"};
 void printRegName(int index){
 	putChar(' ');
-	printf(registersNames[index]);
+	printer(registersNames[14-index]);
 	printf(":");
     cleanBuffer();
 }
 
-void inforegCommand(){
+void inforegCommand(int op){
+    if(op){
     
     printf("RAX: %s    ",numToStr(readRAX(),16));
 
@@ -125,8 +126,9 @@ void inforegCommand(){
     printf("R14: %s    ",numToStr(readR14(),16));
 
     printf("R15: %s    ",numToStr(readR15(),16));
-
-    //printRegs();
+    }else
+        printRegs();
+        
     printf("\n");
 }
 
@@ -138,7 +140,7 @@ void printmemCommand(char* buffer){
     int direction=hexToDec(arg);
     if(direction>=0){ //&& direction <= DIREC_MAX-32){
         for(int i=0;i<=32;i+=4){
-            //imprimo 4 bloques de 4bytes al ser una arquitectura de 64 bits
+            //imprimo 8 bloques de 4bytes al ser una arquitectura de 64 bits
             int value=readDirection(direction+i);
             int low=value>>16;
             value=value<<16;
@@ -160,17 +162,17 @@ void printmemCommand(char* buffer){
 
 
 void dateCommand(){
-    printTime(sysTime(HOURS));
+    printHex(sysTime(HOURS));
     printf(":");
-    printTime(sysTime(MINUTES));
+    printHex(sysTime(MINUTES));
     printf(":");
-    printTime(sysTime(SECONDS));
+    printHex(sysTime(SECONDS));
     printf(" of ");
-    printTime(sysTime(DAY));
+    printHex(sysTime(DAY));
     printf("/");
-    printTime(sysTime(MONTH));
+    printHex(sysTime(MONTH));
     printf("/");
-    printTime(sysTime(YEAR));
+    printHex(sysTime(YEAR));
     printf("\n");
     
 }
@@ -180,7 +182,15 @@ void exceptionTestCommando(char * buffer){
     
     getArguments(buffer,arg);
     int num=strToNum(arg);
-    if(num<0){
+    if(num==0)
+        divTest();
+    else if(num==6)
+        opCodeTest();
+    else{
+        printer("Exception ID is not valid");
+        printf("\n");
+    }
+    /*if(num<0){
         printf("ID de excepcion invalido.\n");
     }else{
         switch (num)
@@ -195,5 +205,5 @@ void exceptionTestCommando(char * buffer){
             printf("ID de excepcion invalido.\n");
             break;
         }
-    }
+    }*/
 }

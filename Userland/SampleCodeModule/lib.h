@@ -12,8 +12,6 @@ void printDec(int num);
 void printer(char* string);
 int strToNum(char* str);
 char* numToStr(int num, int base);
-char* numToTime(int num);
-void printTime(int num);
 void cleanBuffer();
 void printHex(int num);
 char getChar();

@@ -47,29 +47,11 @@ char* numToStr(int num, int base){
         i--;
         num/=base;
     }
-    if(base==16){
+    /*if(base==16){
         buffer[i--]='x';
         buffer[i--]='0';
 
-    }
-
-    return buffer+i+1;
-}
-
-char* numToTime(int num){
-	cleanBuffer();
-    char aux = num%16;
-    int i = MAX_BUFFER;
-    buffer[i]=0;
-	if(num==0)
-		buffer[i--]='0';
-    while(i>=0 && num>0){
-        aux = num%16;
-        buffer[i]=hexArray[aux];
-        i--;
-        num/=16;
-    }
-
+    }*/
 
     return buffer+i+1;
 }
@@ -128,10 +110,6 @@ void printDec(int num){
 
 void printHex(int num){
 	printf(numToStr(num,16));
-}
-
-void printTime(int num){
-	printf(numToTime(num));
 }
 
 void printer(char* string){
