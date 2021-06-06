@@ -69,7 +69,6 @@ printRegs:
 	pushState
 	mov rbx, 0
 	mov rcx, rsp
-	add rcx, 8
 	nextReg:
 	push rcx
 	mov rdi, rbx
