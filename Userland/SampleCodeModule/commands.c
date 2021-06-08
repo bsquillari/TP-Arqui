@@ -137,12 +137,12 @@ void printmemCommand(char* buffer){
     char arg[MAX_BUFFER];
     
     getArguments(buffer,arg);
-    unsigned long int direction=hexToDec(arg);
-    if(direction>=0 && direction <= hexToDec("ffffffff")-32){
-        for(int i=0;i<=32;i+=4){
+    long int direction=hexToDec(arg);
+    if(direction>=0){
+        for(int i=0;i<32;i+=4){
             //imprimo 8 bloques de 4bytes al ser una arquitectura de 64 bits
-            int value=readDirection(direction+i);
-            int low=value>>16;
+            unsigned int value=readDirection(direction+i);
+            unsigned int low=value>>16;
             value=value<<16;
             value+=low;
 
