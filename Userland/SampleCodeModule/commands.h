@@ -7,29 +7,12 @@ int isCommandWithArg(char* command, char* buffer);
 void helpCommand();
 void inforegCommand(int op);
 void printRegName(int index);
-void printRegs();
 
-long readDirection(unsigned long int direction);
+
 void getArguments(char* buffer, char* arg);
 void exceptionTestCommando(char * buffer);
 void printmemCommand(char* buffer);
 void dateCommand();
-
-int readRAX();
-int readRBX();
-int readRCX();
-int readRDX();
-int readRBP();
-int readRSI();
-int readRDI();
-int readR8();
-int readR9();
-int readR10();
-int readR11();
-int readR12();
-int readR13();
-int readR14();
-int readR15();
 
 
 #endif
