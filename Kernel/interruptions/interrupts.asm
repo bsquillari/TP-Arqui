@@ -20,6 +20,7 @@ EXTERN printEOE
 EXTERN waiting
 EXTERN getStackBase
 EXTERN ncClear
+EXTERN cleanBuffer
 
 EXTERN irqDispatcher
 EXTERN exceptionDispatcher
@@ -96,7 +97,7 @@ SECTION .text
 
 	;	Espero una tecla del usuario y luego reinicio el kernel.
 	call printEOE
-	mov rdi, 0xFC
+	mov rdi, 0xFE
 	call picMasterMask
 	sti			
 	mov rdi, 10
@@ -106,6 +107,7 @@ SECTION .text
 	call picMasterMask
 	pop rax
 	call ncClear
+	call cleanBuffer
 	push 0x400000		; Vuelvo a la direccion de memoria de reinicio de shell
 	iretq
 %endmacro
