@@ -45,6 +45,7 @@ int main() {
 
 	// printNum(time);
 	// *************************************************** //
+	printf("Bienvenido! Que comando desea correr?\n");
 	while(1){
 		while((c=getChar())!='\n'){
 			putChar(c);
