@@ -35,8 +35,10 @@ int main() {
 	while(1){
 		while((c=getChar())!='\n'){
 			putChar(c);
-			if(c=='\b')
+			if(c=='\b'){
+			if((*idx)!=0)
 			(*idx)--;
+			}
 			else if(c=='\t'){
 				bufferID = (bufferID+1)%2;
 				if(bufferID){

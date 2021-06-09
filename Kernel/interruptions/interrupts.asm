@@ -16,9 +16,9 @@ GLOBAL _irq05Handler
 GLOBAL _exception0Handler
 GLOBAL _exception6Handler
 
-EXTERN main
-EXTERN getEndBuffer
 EXTERN printEOE
+EXTERN waiting
+EXTERN getStackBase
 
 EXTERN irqDispatcher
 EXTERN exceptionDispatcher
@@ -95,13 +95,23 @@ SECTION .text
 
 	;	Espero una tecla del usuario y luego reinicio el kernel.
 	call printEOE
-	call _hlt
-	call _hlt
+	mov rdi, 0xFC
+	call picMasterMask
+	sti			
+	mov rdi, 10
+	call waiting
+	cli
+	mov rdi, 0xFD
+	call picMasterMask
 	pop rax
-	push main
+	push exceptionReset
 	iretq
 %endmacro
 
+exceptionReset:
+	call getStackBase		; Limpio el stack
+	mov rsp, rax
+	call 0x400000			; Llamo al _start de userland
 
 printRegs:
 	mov rbx, 0
