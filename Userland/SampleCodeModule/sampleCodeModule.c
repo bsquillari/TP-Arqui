@@ -15,20 +15,19 @@ static int var2 = 0;
 	static int * idx=&idx1;
 	
 	
-void resetShell(){
-	for (int i = 0; i < 12; i++)
-	{
-		putChar('\n');
-	}
-	if(!bufferID){
-			*buffer0 = 0;
-			idx0 = 0;
-		}else{
-			*buffer1 = 0;
-			idx1 = 0;
-		}
-	main();
-}
+// void resetShell(){
+// 	for (int i = 0; i < 12; i++)
+// 	{
+// 		putChar('\n');
+// 	}
+// 	if(!bufferID){
+// 			*buffer0 = 0;
+// 			idx0 = 0;
+// 		}else{
+// 			*buffer1 = 0;
+// 			idx1 = 0;
+// 		}
+// }
 int main() {
 
 	// **		Prueba básica de las sysTime			** //

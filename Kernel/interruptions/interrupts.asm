@@ -19,6 +19,7 @@ GLOBAL _exception6Handler
 EXTERN printEOE
 EXTERN waiting
 EXTERN getStackBase
+EXTERN ncClear
 
 EXTERN irqDispatcher
 EXTERN exceptionDispatcher
@@ -104,10 +105,14 @@ SECTION .text
 	mov rdi, 0xFD
 	call picMasterMask
 	pop rax
-	push 0x40108C		; Vuelvo a la direccion de memoria de reinicio de shell
+	call ncClear
+	push 0x400000		; Vuelvo a la direccion de memoria de reinicio de shell
 	iretq
 %endmacro
-
+; reset:
+; 	call getStackBase
+; 	mov rsp, rax
+; 	call 0x40108C
 
 printRegs:
 	mov rbx, 0
