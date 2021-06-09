@@ -5,8 +5,30 @@ char * v = (char*)0xB8000 + 79 * 2;
 
 static int var1 = 0;
 static int var2 = 0;
-
-
+	static char c;
+	static char buffer1[MAX_BUFFER]={0};
+	static int idx1 = 0;
+	static int idx0 = 0;
+	static char buffer0[MAX_BUFFER]={0};
+	static char * buffer = buffer1;
+	static int bufferID = 1;
+	static int * idx=&idx1;
+	
+	
+void resetShell(){
+	for (int i = 0; i < 12; i++)
+	{
+		putChar('\n');
+	}
+	if(!bufferID){
+			*buffer0 = 0;
+			idx0 = 0;
+		}else{
+			*buffer1 = 0;
+			idx1 = 0;
+		}
+	main();
+}
 int main() {
 
 	// **		Prueba básica de las sysTime			** //
@@ -24,14 +46,6 @@ int main() {
 
 	// printNum(time);
 	// *************************************************** //
-	static char c;
-	static char buffer1[MAX_BUFFER]={0};
-	static int idx1 = 0;
-	static int idx0 = 0;
-	static char buffer0[MAX_BUFFER]={0};
-	static char * buffer = buffer1;
-	static int bufferID = 1;
-	static int * idx=&idx1;
 	while(1){
 		while((c=getChar())!='\n'){
 			putChar(c);
@@ -68,3 +82,5 @@ int main() {
 
 	return 0;
 }
+
+
