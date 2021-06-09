@@ -20,7 +20,6 @@ EXTERN printEOE
 EXTERN waiting
 EXTERN getStackBase
 EXTERN ncClear
-EXTERN cleanBuffer
 
 EXTERN irqDispatcher
 EXTERN exceptionDispatcher
@@ -107,7 +106,6 @@ SECTION .text
 	call picMasterMask
 	pop rax
 	call ncClear
-	call cleanBuffer
 	push 0x400000		; Vuelvo a la direccion de memoria de reinicio de shell
 	iretq
 %endmacro

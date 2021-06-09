@@ -31,7 +31,8 @@ void write(unsigned int fd, const char * buffer, unsigned int count){       // N
 
 void read(unsigned int fd, char * buffer, unsigned int count){      // No toma en cuenta files, por ahora
     if(fd==0){      // STDIN
-        while(getEndBuffer()!=count){
+        cleanBuffer();
+        while(getEndBuffer()<count){
 		    _hlt();
         }
         char * inBuffer = getBuffer();
