@@ -2,6 +2,7 @@
 #include "lib.h"
 #include "sysCall.h"
 #include "exceptionTests.h"
+#include "readMemory.h"
 
 #define SECONDS 0
 #define MINUTES 2
