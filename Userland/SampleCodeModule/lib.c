@@ -2,7 +2,6 @@
 #include "sysCall.h"
 #include <stdarg.h>
 char buffer[MAX_BUFFER] = {0};
-static char string[MAX_BUFFER] = {0};
 
 
 int strlen(char* string){

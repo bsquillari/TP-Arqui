@@ -5,21 +5,7 @@ extern printHex
 global readDirection
 global printRegs
 
-global readRAX
-global readRBX
-global readRCX
-global readRDX
-global readRBP
-global readRSI
-global readRDI
-global readR8
-global readR9
-global readR10
-global readR11
-global readR12
-global readR13
-global readR14
-global readR15
+
 
 section .text
 
@@ -84,57 +70,3 @@ printRegs:
 	jne nextReg
 	popState
 	ret
-
-readRAX:
-	ret
-readRBX:
-	mov rax,rbx
-	ret
-readRCX:
-	mov rax,rcx
-	ret
-
-readRDX:
-	mov rax,rdx
-	ret
-readRBP:
-	mov rax,rbp
-	ret
-readRSI:
-	mov rax,rsi
-	ret
-
-readRDI:
-	mov rax,rdi
-	ret
-readR8:
-	mov rax,r8
-	ret
-readR9:
-	mov rax,r9
-	ret
-
-readR10:
-	mov rax,r10
-	ret
-
-readR11:
-	mov rax,r11
-	ret
-
-readR12:
-	mov rax,r12
-	ret
-
-readR13:
-	mov rax,r13
-	ret
-
-readR14:
-	mov rax,r14
-	ret
-
-readR15:
-	mov rax,r15
-	ret
-	
