@@ -14,9 +14,9 @@ int int_80(unsigned int arg1, unsigned int arg2, unsigned int arg3, int sysCall)
     return;
 }
 
-void write(unsigned int fd, const char * buffer, unsigned int count){       // No toma en cuenta files, por ahora
+void write(unsigned int fd, const char * buffer, unsigned int count){       
     if(fd==1){      // STDOUT
-        for (int i = 0; i < count && buffer[i]; i++)            // Tiene que cortar en un 0?
+        for (int i = 0; i < count && buffer[i]; i++)            
         {
             ncPrintChar(buffer[i]);
         }
@@ -29,7 +29,7 @@ void write(unsigned int fd, const char * buffer, unsigned int count){       // N
     }
 }
 
-void read(unsigned int fd, char * buffer, unsigned int count){      // No toma en cuenta files, por ahora
+void read(unsigned int fd, char * buffer, unsigned int count){      
     if(fd==0){      // STDIN
         cleanBuffer();
         while(getEndBuffer()<count){
@@ -41,7 +41,7 @@ void read(unsigned int fd, char * buffer, unsigned int count){      // No toma e
         {
             buffer[i] = inBuffer[i];
         }
-        //buffer[i]=0;            // ??????
+        
         cleanBuffer();
     }
 }

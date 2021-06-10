@@ -4,7 +4,6 @@
 #define BREAK_CODE(num) num>0x80
 #define IS_LETTER(c) ((c>='a') && (c<='z'))
 
-//static int keyDetected = 0;
 static int idx;
 static int capsLock = 0;
 

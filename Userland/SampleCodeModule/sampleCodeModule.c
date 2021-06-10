@@ -15,36 +15,9 @@ static int var2 = 0;
 	static int * idx=&idx1;
 	
 	
-// void resetShell(){
-// 	for (int i = 0; i < 12; i++)
-// 	{
-// 		putChar('\n');
-// 	}
-// 	if(!bufferID){
-// 			*buffer0 = 0;
-// 			idx0 = 0;
-// 		}else{
-// 			*buffer1 = 0;
-// 			idx1 = 0;
-// 		}
-// }
+
 int main() {
 
-	// **		Prueba básica de las sysTime			** //
-	// #include "sysCall.h"
-	// int time = sysTime(2);
-	
-	// printNum(time);
-	// char a[1];
-	// sysRead(0,a, 1);
-	// time = sysTime(4);
-
-	// printNum(time);
-	// sysRead(0,a, 1);
-	// time = sysTime(0);
-
-	// printNum(time);
-	// *************************************************** //
 	printf("Bienvenido! Que comando desea correr?\n");
 	while(1){
 		while((c=getChar())!='\n'){
@@ -74,11 +47,6 @@ int main() {
 		commandSelector(buffer);
 		buffer[0] = 0; // "Borro" el buffer
 	}
-
-	// **		Prueba básica de las exceptions			** //
-		// #include "exceptionTests.h"
-		// divTest();
-	// *************************************************** //
 
 	return 0;
 }

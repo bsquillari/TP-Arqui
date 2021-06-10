@@ -47,11 +47,6 @@ char* numToStr(unsigned long int num, int base){
         i--;
         num/=base;
     }
-    /*if(base==16){
-        buffer[i--]='x';
-        buffer[i--]='0';
-
-    }*/
 
     return buffer+i+1;
 }

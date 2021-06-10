@@ -101,7 +101,6 @@ SECTION .text
 	sti			
 	mov rdi, 10
 	call waiting
-	;cli
 	mov rdi, 0xFD
 	call picMasterMask
 	pop rax
@@ -109,10 +108,7 @@ SECTION .text
 	push 0x400000		; Vuelvo a la direccion de memoria de reinicio de shell
 	iretq
 %endmacro
-; reset:
-; 	call getStackBase
-; 	mov rsp, rax
-; 	call 0x40108C
+
 
 printRegs:
 	mov rbx, 0

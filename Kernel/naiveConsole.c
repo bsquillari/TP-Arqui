@@ -74,10 +74,6 @@ void ncSwitchShell(){
 	currentVideo[1]=0xf0;
 	previousVideo = aux;
 	shellSelector=1-shellSelector;
-	//currentVideo = (shellSelector)?video+(height-2)/2*width*2:video + (height-1)*width*2;
-	// for(uint8_t i = 0; i<width*2;i+=2){
-	// 	currentVideo[i]=' ';
-	// }
 }
 
 void ncNewline(){
@@ -154,7 +150,6 @@ void ncClear(){
 		video[24*width+i] = '-';
 	}
 	currentVideo = (shellSelector)?video+ ((height/2)-1)*width*2:video + (height-1)*width*2;
-	//currentVideo[1]=0xf0;
 }
 
 static uint32_t uintToBase(uint64_t value, char * buffer, uint32_t base)

@@ -32,12 +32,6 @@ void cpuidNotValid(){
 }
 
 void processorVersionInfo(int ebx, int ecx, int edx){
-    // printHex(ebx);
-    // putChar('\n');
-    // printHex(ecx);
-    // putChar('\n');
-    // printHex(edx);
-    // putChar('\n');
     printf("CPU Version Information features:\n");
     auxiliar(feature, ebx, ecx, edx, 10);
 }

@@ -104,7 +104,7 @@ int main()
 	ncPrint("[Finished]");
 
 	ncClear();
-	((EntryPoint)sampleCodeModuleAddress)();	//aca se hace el llamado a main de user
+	((EntryPoint)sampleCodeModuleAddress)();	// Aca se llama a userland
 
 	return 0;
 }
