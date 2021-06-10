@@ -5,10 +5,8 @@
 void commandSelector(char* buffer){
     if(isCommand("help", buffer)){
         helpCommand();
-    }else if(isCommand("inforeg1", buffer)){
-        inforegCommand(1);
     }else if(isCommand("inforeg", buffer)){
-        inforegCommand(0);
+        inforegCommand();
     }else if(isCommandWithArg("printmem", buffer)){
         printmemCommand(buffer);
     }else if(isCommand("date", buffer)){

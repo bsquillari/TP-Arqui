@@ -96,41 +96,8 @@ void printRegName(int index){
     cleanBuffer();
 }
 
-void inforegCommand(int op){
-    if(op){
-    
-    printf("RAX: %s    ",numToStr(readRAX(),16));
-
-    printf("RBX: %s    ",numToStr(readRBX(),16));
-
-    printf("RCX: %s    ",numToStr(readRCX(),16));
-
-    printf("RDX: %s    ",numToStr(readRDX(),16));
-
-    printf("RBP: %s    ",numToStr(readRBP(),16));
-
-    printf("RSI: %s    ",numToStr(readRSI(),16));
-
-    printf("RDI: %s    ",numToStr(readRDI(),16));
-
-    printf("R8: %s    ",numToStr(readR8(),16));
-
-    printf("R9: %s    ",numToStr(readR9(),16));
-
-    printf("R10: %s    ",numToStr(readR10(),16));
-
-    printf("R11: %s    ",numToStr(readR11(),16));
-
-    printf("R12: %s    ",numToStr(readR12(),16));
-
-    printf("R13: %s    ",numToStr(readR13(),16));
-
-    printf("R14: %s    ",numToStr(readR14(),16));
-
-    printf("R15: %s    ",numToStr(readR15(),16));
-    }else
-        printRegs();
-        
+void inforegCommand(){
+    printRegs();    
     printf("\n");
 }
 
