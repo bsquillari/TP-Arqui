@@ -146,8 +146,10 @@ void ncBackspace(){
 
 void ncClear(){
 	int i, mid = width;
-	for (i = 0; i < height * width; i++)
+	for (i = 0; i < height * width; i++){
 		video[i * 2] = ' ';
+		video[i*2 + 1]=GREY;
+	}
 	for(i=0; i<width*2; i+=2){
 		video[24*width+i] = '-';
 	}
