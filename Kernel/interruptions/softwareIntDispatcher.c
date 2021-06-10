@@ -11,7 +11,7 @@ EntryPoint functionPtrs[] = {&write, &read, &accessClock};
 
 int int_80(unsigned int arg1, unsigned int arg2, unsigned int arg3, int sysCall){
     functionPtrs[sysCall](arg1, arg2, arg3);
-    return 0;
+    return;
 }
 
 void write(unsigned int fd, const char * buffer, unsigned int count){       
