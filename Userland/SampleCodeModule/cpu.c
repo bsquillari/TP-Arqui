@@ -42,7 +42,7 @@ void processorVersionInfo(int ebx, int ecx, int edx){
     auxiliar(feature, ebx, ecx, edx, 10);
 }
 
-void auxiliar(cpuFeatures features[], unsigned int ebx, unsigned int ecx, unsigned int edx, int cant){
+void auxiliar(cpuFeatures features[], int ebx, int ecx, int edx, int cant){
     for (int i = 0; i < cant; i++){
     printf("Press ANY key to view next feature\n");
     getChar();

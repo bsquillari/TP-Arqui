@@ -2,9 +2,6 @@
 #include "lib.h"
 #include "commandDispatcher.h"
 char * v = (char*)0xB8000 + 79 * 2;
-
-static int var1 = 0;
-static int var2 = 0;
 	static char c;
 	static char buffer1[MAX_BUFFER]={0};
 	static int idx1 = 0;

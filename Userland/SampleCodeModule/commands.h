@@ -7,7 +7,7 @@ int isCommandWithArg(char* command, char* buffer);
 void helpCommand();
 void inforegCommand(int op);
 void printRegName(int index);
-
+void cpuidCommand();
 
 void getArguments(char* buffer, char* arg);
 void exceptionTestCommando(char * buffer);
