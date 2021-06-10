@@ -42,8 +42,10 @@ void ncPrintChar(char character)
 		ncBackspace();
 		return;
 	}
+	currentVideo[1]=GREY;
 	*currentVideo = character;
 	currentVideo += 2;
+	currentVideo[1]=0xf0;
 }
 
 void ncPrintColorChar(char character,int color)
@@ -67,7 +69,9 @@ void ncScroll(){
 
 void ncSwitchShell(){
 	uint8_t* aux = currentVideo;
+	currentVideo[1]=GREY;
 	currentVideo = previousVideo;
+	currentVideo[1]=0xf0;
 	previousVideo = aux;
 	shellSelector=1-shellSelector;
 	//currentVideo = (shellSelector)?video+(height-2)/2*width*2:video + (height-1)*width*2;
@@ -77,6 +81,7 @@ void ncSwitchShell(){
 }
 
 void ncNewline(){
+	currentVideo[1]=GREY;
 	if(shellSelector){
 		for(int i = 0; i<(height/2)-1; i++){
 			for (int j=0; j<2*width-1; j++)
@@ -90,6 +95,7 @@ void ncNewline(){
 		}
 		
 		currentVideo = video+(height-2)/2*width*2;
+		currentVideo[1]=0xf0;
 		return;
 	}
 
@@ -105,6 +111,7 @@ void ncNewline(){
 	}
 	
 	currentVideo = video + (height-1)*width*2;
+	currentVideo[1]=0xf0;
 }
 
 
@@ -131,8 +138,10 @@ void ncPrintBase(uint64_t value, uint32_t base)
 
 void ncBackspace(){
 	if((int)(currentVideo-video)%(width*2)==0) return;
+	currentVideo[1]=GREY;
 	currentVideo-=2;
 	*currentVideo=' ';
+	currentVideo[1]=0xf0;
 }
 
 void ncClear(){
@@ -143,6 +152,7 @@ void ncClear(){
 		video[24*width+i] = '-';
 	}
 	currentVideo = (shellSelector)?video+ ((height/2)-1)*width*2:video + (height-1)*width*2;
+	//currentVideo[1]=0xf0;
 }
 
 static uint32_t uintToBase(uint64_t value, char * buffer, uint32_t base)
