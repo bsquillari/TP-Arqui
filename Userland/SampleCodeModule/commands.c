@@ -3,6 +3,7 @@
 #include "sysCall.h"
 #include "exceptionTests.h"
 #include "readMemory.h"
+#include "cpu.h"
 
 #define SECONDS 0
 #define MINUTES 2
@@ -196,4 +197,8 @@ void exceptionTestCommando(char * buffer){
             break;
     }
     
+}
+
+void cpuidCommand(){
+    cpuFun();
 }
